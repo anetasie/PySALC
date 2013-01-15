@@ -138,7 +138,6 @@ def metropolis(counts, ranges, parnames, start, sigma, outfile='out.txt', num_it
 	
 draws = metropolis( counts, ranges, parnames, start, sigma, outfile="out.txt", num_iter=10000 )
 
-#draws = metropolis( np.array([1,14,27]), ranges, parnames, start, sigma, outfile="out.txt", num_iter=25000 )
 
 #means ={}
 #for i,par in enumerate(parnames):
