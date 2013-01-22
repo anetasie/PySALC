@@ -1,9 +1,16 @@
+# Running example of the application script. Define a model and simulate a small number of counts
+# in the spectrum, define the energy ranges for counting counts, run simple MCMC with Metropolis to get the 
+# confidence on parameters
+
 from ui import *
 import sherpa.astro.ui as ui
 from mhtest import *
 execfile("funcs.py")
 
+# needs to use cash or cstat for this analysis
 set_stat("cash")
+
+# define a model expression
 
 model = "xsphabs.abs1*powlaw1d.p1"
 parnames=np.array(['abs1.nh','p1.gamma','p1.ampl'])
@@ -138,7 +145,12 @@ def metropolis(counts, ranges, parnames, start, sigma, outfile='out.txt', num_it
 	
 draws = metropolis( counts, ranges, parnames, start, sigma, outfile="out.txt", num_iter=10000 )
 
-
+# plot to investigate the performance of the simulations in terms of the MCMC runs, plot_trace()
+# and parameter distributions - plot_pdf(), plot_cdf()
+plot_trace(draws[:,2]) 
+plot_pdf(draws[:,2], bins=100)
+plot_cdf(draws[:,2])
+print get_cdf_plot()
 #means ={}
 #for i,par in enumerate(parnames):
 #	means[par] = np.round(np.mean( draws[:,i+1]) , 3)
